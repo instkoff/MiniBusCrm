@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30204.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBusCrm.Api", "src\MiniBusCrm.Api\MiniBusCrm.Api.csproj", "{CE57BE7B-DE87-495D-8577-19BF6784EF32}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBusCrm.Domain.Contracts", "src\MiniBusCrm.Domain.Contracts\MiniBusCrm.Domain.Contracts.csproj", "{C27BC02D-4051-40D9-9CAB-8ED0F79756E0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBusCrm.Domain.Implementations", "src\MiniBusCrm.Domain.Implementations\MiniBusCrm.Domain.Implementations.csproj", "{CEB94A7C-C116-4D86-825C-2AD81B9D0225}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniBusCrm.DataAccess.Contracts", "src\MiniBusCrm.DataAccess.Contracts\MiniBusCrm.DataAccess.Contracts.csproj", "{4B834559-0F2C-4922-928C-70E23F5D87B2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBusCrm.DataAccess.Implementations", "src\MiniBusCrm.DataAccess.Implementations\MiniBusCrm.DataAccess.Implementations.csproj", "{CC5EB239-9086-4F7A-84FF-68C12E07DF65}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniBusCrm.DataAccess.Migrations", "src\MiniBusCrm.DataAccess.Migrations\MiniBusCrm.DataAccess.Migrations.csproj", "{9C83F343-D840-42F5-82FA-8A1464F1072D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE57BE7B-DE87-495D-8577-19BF6784EF32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE57BE7B-DE87-495D-8577-19BF6784EF32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE57BE7B-DE87-495D-8577-19BF6784EF32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE57BE7B-DE87-495D-8577-19BF6784EF32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C27BC02D-4051-40D9-9CAB-8ED0F79756E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C27BC02D-4051-40D9-9CAB-8ED0F79756E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C27BC02D-4051-40D9-9CAB-8ED0F79756E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C27BC02D-4051-40D9-9CAB-8ED0F79756E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CEB94A7C-C116-4D86-825C-2AD81B9D0225}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CEB94A7C-C116-4D86-825C-2AD81B9D0225}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CEB94A7C-C116-4D86-825C-2AD81B9D0225}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CEB94A7C-C116-4D86-825C-2AD81B9D0225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B834559-0F2C-4922-928C-70E23F5D87B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B834559-0F2C-4922-928C-70E23F5D87B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B834559-0F2C-4922-928C-70E23F5D87B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B834559-0F2C-4922-928C-70E23F5D87B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC5EB239-9086-4F7A-84FF-68C12E07DF65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC5EB239-9086-4F7A-84FF-68C12E07DF65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC5EB239-9086-4F7A-84FF-68C12E07DF65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC5EB239-9086-4F7A-84FF-68C12E07DF65}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9C83F343-D840-42F5-82FA-8A1464F1072D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C83F343-D840-42F5-82FA-8A1464F1072D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C83F343-D840-42F5-82FA-8A1464F1072D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C83F343-D840-42F5-82FA-8A1464F1072D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {9D4BBDCF-33A4-4E27-B7F8-BA87BF6BFA70}
+	EndGlobalSection
+EndGlobal

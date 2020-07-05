@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>MiniBusCrm.Api</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Controllers\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="5.5.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiniBusCrm.DataAccess.Contracts\MiniBusCrm.DataAccess.Contracts.csproj" />
+    <ProjectReference Include="..\MiniBusCrm.DataAccess.Implementations\MiniBusCrm.DataAccess.Implementations.csproj" />
+    <ProjectReference Include="..\MiniBusCrm.DataAccess.Migrations\MiniBusCrm.DataAccess.Migrations.csproj" />
+  </ItemGroup>
+
+
+</Project>
