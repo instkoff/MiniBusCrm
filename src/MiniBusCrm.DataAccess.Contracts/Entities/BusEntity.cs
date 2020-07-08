@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace MiniBusCrm.DataAccess.Entities
+﻿namespace MiniBusCrm.DataAccess.Contracts.Entities
 {
     public class BusEntity : BaseEntity
     {
-        public string BusModel { get; set; }
-        public string BusNumber { get; set; }
+        public string Model { get; set; }
+        public string Number { get; set; }
     }
 }

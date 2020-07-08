@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace MiniBusCrm.DataAccess.Entities
+﻿namespace MiniBusCrm.DataAccess.Contracts.Entities
 {
     public class RouteEntity : BaseEntity
     {

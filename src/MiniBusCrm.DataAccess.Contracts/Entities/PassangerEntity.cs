@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-namespace MiniBusCrm.DataAccess.Entities
+namespace MiniBusCrm.DataAccess.Contracts.Entities
 {
     public class PassangerEntity : BaseEntity
     {

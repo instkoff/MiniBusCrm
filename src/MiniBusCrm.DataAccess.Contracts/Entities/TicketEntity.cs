@@ -1,11 +1,13 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace MiniBusCrm.DataAccess.Entities
+namespace MiniBusCrm.DataAccess.Contracts.Entities
 {
     public class TicketEntity : BaseEntity
     {
         public PassangerEntity Passenger { get; set; }
         public string Seat { get; set; }
+        [Column(TypeName = "money")]
         public decimal Price { get; set; }
         public bool IsBaggage { get; set; }
         public bool IsPaid { get; set; }

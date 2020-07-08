@@ -4,4 +4,17 @@
     <TargetFramework>netstandard2.1</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Services\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiniBusCrm.DataAccess.Contracts\MiniBusCrm.DataAccess.Contracts.csproj" />
+    <ProjectReference Include="..\MiniBusCrm.Domain.Contracts\MiniBusCrm.Domain.Contracts.csproj" />
+  </ItemGroup>
+
 </Project>

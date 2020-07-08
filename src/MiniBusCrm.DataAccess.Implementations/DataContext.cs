@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
-using MiniBusCrm.DataAccess.Entities;
+using MiniBusCrm.DataAccess.Contracts.Entities;
 
 namespace MiniBusCrm.DataAccess.Implementations
 {

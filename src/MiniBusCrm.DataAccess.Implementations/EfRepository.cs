@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using MiniBusCrm.DataAccess.Contracts;
-using MiniBusCrm.DataAccess.Entities;
+using MiniBusCrm.DataAccess.Contracts.Entities;
 
 namespace MiniBusCrm.DataAccess.Implementations
 {

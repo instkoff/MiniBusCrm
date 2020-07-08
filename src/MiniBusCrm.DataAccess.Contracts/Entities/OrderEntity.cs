@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace MiniBusCrm.DataAccess.Entities
+namespace MiniBusCrm.DataAccess.Contracts.Entities
 {
     public class OrderEntity : BaseEntity
     {
