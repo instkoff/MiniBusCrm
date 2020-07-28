@@ -25,17 +25,17 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid");
 
-                    b.Property<string>("BusModel")
-                        .HasColumnType("text");
-
-                    b.Property<string>("BusNumber")
-                        .HasColumnType("text");
-
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
+
+                    b.Property<string>("Model")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Number")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
@@ -92,12 +92,12 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.Property<string>("OrderName")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("RouteEntityId")
+                    b.Property<Guid?>("RouteId")
                         .HasColumnType("uuid");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RouteEntityId");
+                    b.HasIndex("RouteId");
 
                     b.ToTable("Orders");
                 });
@@ -216,9 +216,9 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.OrderEntity", b =>
                 {
-                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", "RouteEntity")
+                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", "Route")
                         .WithMany()
-                        .HasForeignKey("RouteEntityId");
+                        .HasForeignKey("RouteId");
                 });
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", b =>

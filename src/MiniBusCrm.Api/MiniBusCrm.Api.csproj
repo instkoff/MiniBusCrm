@@ -6,10 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\" />
-  </ItemGroup>
-
-  <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.5">
       <PrivateAssets>all</PrivateAssets>
@@ -22,6 +19,7 @@
     <ProjectReference Include="..\MiniBusCrm.DataAccess.Contracts\MiniBusCrm.DataAccess.Contracts.csproj" />
     <ProjectReference Include="..\MiniBusCrm.DataAccess.Implementations\MiniBusCrm.DataAccess.Implementations.csproj" />
     <ProjectReference Include="..\MiniBusCrm.DataAccess.Migrations\MiniBusCrm.DataAccess.Migrations.csproj" />
+    <ProjectReference Include="..\MiniBusCrm.Domain.Implementations\MiniBusCrm.Domain.Implementations.csproj" />
   </ItemGroup>
 
 

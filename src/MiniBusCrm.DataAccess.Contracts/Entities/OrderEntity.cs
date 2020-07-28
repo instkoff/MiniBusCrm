@@ -7,7 +7,7 @@ namespace MiniBusCrm.DataAccess.Contracts.Entities
     {
         public string OrderName { get; set; }
         public DateTime DepartureDate { get; set; }
-        public RouteEntity RouteEntity { get; set; }
+        public RouteEntity Route { get; set; }
         public ICollection<TicketEntity> BusTickets { get; set; }
 
     }

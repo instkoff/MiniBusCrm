@@ -5,7 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Services\" />
+    <ProjectReference Include="..\MiniBusCrm.DataAccess.Contracts\MiniBusCrm.DataAccess.Contracts.csproj" />
   </ItemGroup>
 
 </Project>

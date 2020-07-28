@@ -9,7 +9,7 @@ namespace MiniBusCrm.Domain.Contracts.Models
         public DateTime CreateDate { get; set; }
         public string OrderName { get; set; }
         public DateTime DepartureDate { get; set; }
-        public RouteModel RouteEntity { get; set; }
+        public RouteModel Route { get; set; }
         public List<TicketModel> BusTickets { get; set; }
     }
 }

@@ -14,8 +14,8 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
-                    BusModel = table.Column<string>(nullable: true),
-                    BusNumber = table.Column<string>(nullable: true)
+                    Model = table.Column<string>(nullable: true),
+                    Number = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -96,14 +96,14 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     IsActive = table.Column<bool>(nullable: false),
                     OrderName = table.Column<string>(nullable: true),
                     DepartureDate = table.Column<DateTime>(nullable: false),
-                    RouteEntityId = table.Column<Guid>(nullable: true)
+                    RouteId = table.Column<Guid>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Routes_RouteEntityId",
-                        column: x => x.RouteEntityId,
+                        name: "FK_Orders_Routes_RouteId",
+                        column: x => x.RouteId,
                         principalTable: "Routes",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -118,7 +118,7 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     IsActive = table.Column<bool>(nullable: false),
                     PassengerId = table.Column<Guid>(nullable: true),
                     Seat = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(nullable: false),
+                    Price = table.Column<decimal>(type: "money", nullable: false),
                     IsBaggage = table.Column<bool>(nullable: false),
                     IsPaid = table.Column<bool>(nullable: false),
                     PaidDate = table.Column<DateTime>(nullable: true),
@@ -149,9 +149,9 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_RouteEntityId",
+                name: "IX_Orders_RouteId",
                 table: "Orders",
-                column: "RouteEntityId");
+                column: "RouteId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Routes_BusId",
