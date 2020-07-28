@@ -10,17 +10,22 @@ namespace MiniBusCrm.Domain.Implementations.Profiles
         {
             CreateMap<BusModel, BusEntity>();
             CreateMap<DriverModel, DriverEntity>();
-            CreateMap<OrderModel, OrderEntity>();
+            CreateMap<JourneyModel, JourneyEntity>();
             CreateMap<PassangerModel, PassangerEntity>();
             CreateMap<RouteModel, RouteEntity>();
             CreateMap<TicketModel, TicketEntity>();
 
             CreateMap<BusEntity, BusModel>();
             CreateMap<DriverEntity, DriverModel>();
-            CreateMap<OrderEntity, OrderModel>();
+            CreateMap<JourneyEntity, JourneyModel>()
+                .ForMember(dest => dest.RouteId, opt => opt.MapFrom(src => src.Route.Id));
             CreateMap<PassangerEntity, PassangerModel>();
-            CreateMap<RouteEntity, RouteModel>();
-            CreateMap<TicketEntity, TicketModel>();
+            CreateMap<RouteEntity, RouteModel>()
+                .ForMember(dest=>dest.DriverId, opt=>opt.MapFrom(src=>src.Driver.Id))
+                .ForMember(dest=>dest.BusId, opt=>opt.MapFrom(src=>src.Bus.Id));
+            CreateMap<TicketEntity, TicketModel>()
+                .ForMember(dest => dest.RouteId, opt => opt.MapFrom(src => src.Route.Id))
+                .ForMember(dest=>dest.JourneyId, opt=>opt.MapFrom(src=>src.Journey.Id));
         }
     }
 }

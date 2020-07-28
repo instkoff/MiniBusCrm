@@ -6,6 +6,5 @@ namespace MiniBusCrm.Api.Controllers
     [Route("[controller]")]
     public class BaseController : Controller
     {
-
     }
 }

@@ -5,7 +5,6 @@ using Microsoft.OpenApi.Models;
 using MiniBusCrm.DataAccess.Contracts;
 using MiniBusCrm.DataAccess.Implementations;
 
-
 namespace MiniBusCrm.Api
 {
     public static class ServiceCollectionExtension
@@ -14,7 +13,7 @@ namespace MiniBusCrm.Api
         {
             services.AddDbContext<DataContext>(builder =>
             {
-                builder.EnableSensitiveDataLogging(true);
+                builder.EnableSensitiveDataLogging();
 
                 builder.UseNpgsql(configuration.GetConnectionString("DefaultConnection"), assembly =>
                     assembly.MigrationsAssembly("MiniBusCrm.DataAccess.Migrations"));
@@ -29,10 +28,9 @@ namespace MiniBusCrm.Api
         {
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "MiniBusCrm", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo {Title = "MiniBusCrm", Version = "v1"});
             });
             return services;
         }
     }
 }
-

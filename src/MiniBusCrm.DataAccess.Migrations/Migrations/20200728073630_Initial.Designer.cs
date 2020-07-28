@@ -76,7 +76,7 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.ToTable("Drivers");
                 });
 
-            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.OrderEntity", b =>
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.JourneyEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -216,7 +216,7 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.OrderEntity", b =>
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.JourneyEntity", b =>
                 {
                     b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", "Route")
                         .WithMany()
@@ -236,7 +236,7 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.TicketEntity", b =>
                 {
-                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.OrderEntity", "Order")
+                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.JourneyEntity", "Journey")
                         .WithMany("BusTickets")
                         .HasForeignKey("OrderId");
 

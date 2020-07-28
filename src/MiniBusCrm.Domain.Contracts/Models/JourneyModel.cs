@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace MiniBusCrm.Domain.Contracts.Models
 {
-    public class OrderModel
+    public class JourneyModel
     {
         public Guid Id { get; set; }
         public DateTime CreateDate { get; set; }
-        public string OrderName { get; set; }
+        public string JourneyName { get; set; }
         public DateTime DepartureDate { get; set; }
-        public RouteModel Route { get; set; }
+        public Guid RouteId { get; set; }
         public List<TicketModel> BusTickets { get; set; }
     }
 }

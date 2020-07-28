@@ -25,27 +25,33 @@ namespace MiniBusCrm.Domain.Implementations.Services
         public async Task<Guid> Create(RouteModel routeModel)
         {
             var routeEntity = _mapper.Map<RouteEntity>(routeModel);
+            routeEntity.Bus = await _dbRepository.Get<BusEntity>(b => b.Id == routeModel.BusId).FirstOrDefaultAsync();
+            routeEntity.Driver = await _dbRepository.Get<DriverEntity>(d => d.Id == routeModel.DriverId)
+                .FirstOrDefaultAsync();
             await _dbRepository.Add(routeEntity);
             await _dbRepository.SaveChangesAsync();
             return routeEntity.Id;
         }
+
         public List<RouteModel> GetAll()
         {
             var routes = _dbRepository.Get<RouteEntity>()
-                .Include(b=>b.Bus)
-                .Include(d=>d.Driver).ToList();
+                .Include(b => b.Bus)
+                .Include(d => d.Driver).ToList();
             var routeModels = _mapper.Map<List<RouteModel>>(routes);
             return routeModels;
         }
+
         public async Task<RouteModel> Get(Guid id)
         {
             var routeEntity = await _dbRepository.Get<RouteEntity>(x => x.Id == id)
-                .Include(b=>b.Bus)
-                .Include(d=>d.Driver)
+                .Include(b => b.Bus)
+                .Include(d => d.Driver)
                 .FirstOrDefaultAsync();
             var routeModel = _mapper.Map<RouteModel>(routeEntity);
             return routeModel;
         }
+
         public async Task<Guid> Update(RouteModel routeModel)
         {
             var routeEntity = _mapper.Map<RouteEntity>(routeModel);
@@ -56,7 +62,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
 
         public async Task Delete(Guid id)
         {
-            await _dbRepository.Delete<OrderEntity>(id);
+            await _dbRepository.Delete<JourneyEntity>(id);
             await _dbRepository.SaveChangesAsync();
         }
     }

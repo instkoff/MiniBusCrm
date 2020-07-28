@@ -11,54 +11,57 @@ using MiniBusCrm.Domain.Contracts.Services;
 
 namespace MiniBusCrm.Domain.Implementations.Services
 {
-    public class OrderService : IOrderService
+    public class JourneyService : IJourneyService
     {
         private readonly IDbRepository _dbRepository;
         private readonly IMapper _mapper;
 
-        public OrderService(IDbRepository dbRepository, IMapper mapper)
+        public JourneyService(IDbRepository dbRepository, IMapper mapper)
         {
             _dbRepository = dbRepository;
             _mapper = mapper;
         }
 
-        public async Task<Guid> Create(OrderModel orderModel)
+        public async Task<Guid> Create(JourneyModel journeyModel)
         {
-            var orderEntity = _mapper.Map<OrderEntity>(orderModel);
-            orderEntity.Route = _dbRepository.Get<RouteEntity>(x=>x.Id == orderModel.Route.Id).FirstOrDefault();
+            var orderEntity = _mapper.Map<JourneyEntity>(journeyModel);
+            orderEntity.Route = _dbRepository.Get<RouteEntity>(r => r.Id == journeyModel.RouteId).FirstOrDefault();
             await _dbRepository.Add(orderEntity);
             await _dbRepository.SaveChangesAsync();
             return orderEntity.Id;
         }
-        public List<OrderModel> GetAll()
+
+        public List<JourneyModel> GetAll()
         {
-            var orderCollection = _dbRepository.GetAll<OrderEntity>()
-                .Include(r=>r.Route)
-                .Include(t=>t.BusTickets)
+            var orderCollection = _dbRepository.GetAll<JourneyEntity>()
+                .Include(r => r.Route)
+                .Include(t => t.BusTickets)
                 .ToList();
-            var orderModels = _mapper.Map<List<OrderModel>>(orderCollection);
+            var orderModels = _mapper.Map<List<JourneyModel>>(orderCollection);
             return orderModels;
         }
-        public async Task<OrderModel> Get(Guid id)
+
+        public async Task<JourneyModel> Get(Guid id)
         {
-            var orderEntity = await _dbRepository.Get<OrderEntity>(x => x.Id == id)
-                .Include(r=>r.Route)
+            var orderEntity = await _dbRepository.Get<JourneyEntity>(x => x.Id == id)
+                .Include(r => r.Route)
                 .Include(t => t.BusTickets)
                 .FirstOrDefaultAsync();
-            var orderModel = _mapper.Map<OrderModel>(orderEntity);
+            var orderModel = _mapper.Map<JourneyModel>(orderEntity);
             return orderModel;
         }
 
-        public async Task<Guid> Update(OrderModel orderModel)
+        public async Task<Guid> Update(JourneyModel journeyModel)
         {
-            var orderEntity = _mapper.Map<OrderEntity>(orderModel);
+            var orderEntity = _mapper.Map<JourneyEntity>(journeyModel);
             await _dbRepository.Update(orderEntity);
             await _dbRepository.SaveChangesAsync();
             return orderEntity.Id;
         }
+
         public async Task Delete(Guid id)
         {
-            await _dbRepository.Delete<OrderEntity>(id);
+            await _dbRepository.Delete<JourneyEntity>(id);
             await _dbRepository.SaveChangesAsync();
         }
     }

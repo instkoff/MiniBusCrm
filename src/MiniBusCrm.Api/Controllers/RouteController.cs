@@ -20,13 +20,11 @@ namespace MiniBusCrm.Api.Controllers
         public async Task<ActionResult> Create([FromBody] RouteModel route)
         {
             var result = await _routeService.Create(route);
-            if (result == Guid.Empty)
-            {
-                return BadRequest("Route not created");
-            }
+            if (result == Guid.Empty) return BadRequest("Route not created");
 
             return Ok(result);
         }
+
         [HttpPut]
         public async Task<ActionResult> Update([FromBody] RouteModel model)
         {
@@ -35,15 +33,13 @@ namespace MiniBusCrm.Api.Controllers
                 return BadRequest("Route not updated");
             return Ok(result);
         }
+
         [HttpGet("id")]
         public ActionResult<RouteModel> Get(Guid id)
         {
             var model = _routeService.Get(id);
 
-            if (model == null)
-            {
-                return BadRequest("Route not found");
-            }
+            if (model == null) return BadRequest("Route not found");
 
             return Ok(model);
         }
@@ -53,13 +49,11 @@ namespace MiniBusCrm.Api.Controllers
         {
             var collection = _routeService.GetAll();
 
-            if (collection == null)
-            {
-                return BadRequest("Routes not found");
-            }
+            if (collection == null) return BadRequest("Routes not found");
 
             return Ok(collection);
         }
+
         [HttpDelete("id")]
         public async Task<ActionResult> Delete(Guid id)
         {

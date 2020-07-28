@@ -8,8 +8,8 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Buses",
-                columns: table => new
+                "Buses",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
@@ -17,14 +17,11 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     Model = table.Column<string>(nullable: true),
                     Number = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Buses", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Buses", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Drivers",
-                columns: table => new
+                "Drivers",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
@@ -35,14 +32,11 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     DoumentSerialNumber = table.Column<string>(nullable: true),
                     DocumentNumber = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Drivers", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Drivers", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Passangers",
-                columns: table => new
+                "Passangers",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
@@ -52,14 +46,11 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     Patronymic = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Passangers", x => x.Id);
-                });
+                constraints: table => { table.PrimaryKey("PK_Passangers", x => x.Id); });
 
             migrationBuilder.CreateTable(
-                name: "Routes",
-                columns: table => new
+                "Routes",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
@@ -74,22 +65,22 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                 {
                     table.PrimaryKey("PK_Routes", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Routes_Buses_BusId",
-                        column: x => x.BusId,
-                        principalTable: "Buses",
-                        principalColumn: "Id",
+                        "FK_Routes_Buses_BusId",
+                        x => x.BusId,
+                        "Buses",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Routes_Drivers_DriverId",
-                        column: x => x.DriverId,
-                        principalTable: "Drivers",
-                        principalColumn: "Id",
+                        "FK_Routes_Drivers_DriverId",
+                        x => x.DriverId,
+                        "Drivers",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Orders",
-                columns: table => new
+                "Orders",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
@@ -102,23 +93,23 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                 {
                     table.PrimaryKey("PK_Orders", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Orders_Routes_RouteId",
-                        column: x => x.RouteId,
-                        principalTable: "Routes",
-                        principalColumn: "Id",
+                        "FK_Orders_Routes_RouteId",
+                        x => x.RouteId,
+                        "Routes",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
-                name: "Tickets",
-                columns: table => new
+                "Tickets",
+                table => new
                 {
                     Id = table.Column<Guid>(nullable: false),
                     CreateDate = table.Column<DateTime>(nullable: false),
                     IsActive = table.Column<bool>(nullable: false),
                     PassengerId = table.Column<Guid>(nullable: true),
                     Seat = table.Column<string>(nullable: true),
-                    Price = table.Column<decimal>(type: "money", nullable: false),
+                    Price = table.Column<decimal>("money", nullable: false),
                     IsBaggage = table.Column<bool>(nullable: false),
                     IsPaid = table.Column<bool>(nullable: false),
                     PaidDate = table.Column<DateTime>(nullable: true),
@@ -129,75 +120,75 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                 {
                     table.PrimaryKey("PK_Tickets", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Tickets_Orders_OrderId",
-                        column: x => x.OrderId,
-                        principalTable: "Orders",
-                        principalColumn: "Id",
+                        "FK_Tickets_Orders_OrderId",
+                        x => x.OrderId,
+                        "Orders",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Tickets_Passangers_PassengerId",
-                        column: x => x.PassengerId,
-                        principalTable: "Passangers",
-                        principalColumn: "Id",
+                        "FK_Tickets_Passangers_PassengerId",
+                        x => x.PassengerId,
+                        "Passangers",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_Tickets_Routes_RouteId",
-                        column: x => x.RouteId,
-                        principalTable: "Routes",
-                        principalColumn: "Id",
+                        "FK_Tickets_Routes_RouteId",
+                        x => x.RouteId,
+                        "Routes",
+                        "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_Orders_RouteId",
-                table: "Orders",
-                column: "RouteId");
+                "IX_Orders_RouteId",
+                "Orders",
+                "RouteId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Routes_BusId",
-                table: "Routes",
-                column: "BusId");
+                "IX_Routes_BusId",
+                "Routes",
+                "BusId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Routes_DriverId",
-                table: "Routes",
-                column: "DriverId");
+                "IX_Routes_DriverId",
+                "Routes",
+                "DriverId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_OrderId",
-                table: "Tickets",
-                column: "OrderId");
+                "IX_Tickets_OrderId",
+                "Tickets",
+                "OrderId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_PassengerId",
-                table: "Tickets",
-                column: "PassengerId");
+                "IX_Tickets_PassengerId",
+                "Tickets",
+                "PassengerId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Tickets_RouteId",
-                table: "Tickets",
-                column: "RouteId");
+                "IX_Tickets_RouteId",
+                "Tickets",
+                "RouteId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "Tickets");
+                "Tickets");
 
             migrationBuilder.DropTable(
-                name: "Orders");
+                "Orders");
 
             migrationBuilder.DropTable(
-                name: "Passangers");
+                "Passangers");
 
             migrationBuilder.DropTable(
-                name: "Routes");
+                "Routes");
 
             migrationBuilder.DropTable(
-                name: "Buses");
+                "Buses");
 
             migrationBuilder.DropTable(
-                name: "Drivers");
+                "Drivers");
         }
     }
 }

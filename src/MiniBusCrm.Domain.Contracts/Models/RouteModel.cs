@@ -8,7 +8,7 @@ namespace MiniBusCrm.Domain.Contracts.Models
         public string RouteName { get; set; }
         public string ArrivalCity { get; set; }
         public string DepartureCity { get; set; }
-        public DriverModel Driver { get; set; }
-        public BusModel Bus { get; set; }
+        public Guid DriverId { get; set; }
+        public Guid BusId { get; set; }
     }
 }

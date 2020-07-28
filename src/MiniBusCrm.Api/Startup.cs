@@ -1,16 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using MiniBusCrm.Domain.Contracts.Services;
 using MiniBusCrm.Domain.Implementations.Profiles;
 using MiniBusCrm.Domain.Implementations.Services;
@@ -33,7 +26,7 @@ namespace MiniBusCrm.Api
             services.AddDatabase(Configuration);
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddSwagger();
-            services.AddTransient<IOrderService, OrderService>()
+            services.AddTransient<IJourneyService, JourneyService>()
                 .AddTransient<IRouteService, RouteService>()
                 .AddTransient<ITicketService, TicketService>();
         }
@@ -41,10 +34,7 @@ namespace MiniBusCrm.Api
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
 
             app.UseHttpsRedirection();
 
@@ -59,10 +49,7 @@ namespace MiniBusCrm.Api
                 x.RoutePrefix = "swagger";
             });
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
         }
     }
 }

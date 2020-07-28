@@ -12,7 +12,7 @@ namespace MiniBusCrm.Domain.Contracts.Models
         public bool IsBaggage { get; set; }
         public bool IsPaid { get; set; }
         public DateTime? PaidDate { get; set; }
-        public RouteModel Route { get; set; }
-        public OrderModel Order { get; set; }
+        public Guid RouteId { get; set; }
+        public Guid JourneyId { get; set; }
     }
 }

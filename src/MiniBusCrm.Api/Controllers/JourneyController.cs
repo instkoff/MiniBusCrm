@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -8,54 +7,55 @@ using MiniBusCrm.Domain.Contracts.Services;
 
 namespace MiniBusCrm.Api.Controllers
 {
-    public class OrderController : BaseController
+    public class JourneyController : BaseController
     {
-        private readonly IOrderService _orderService;
+        private readonly IJourneyService _journeyService;
 
-        public OrderController(IOrderService orderService)
+        public JourneyController(IJourneyService journeyService)
         {
-            _orderService = orderService;
+            _journeyService = journeyService;
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult> Create([FromBody] OrderModel order)
+        public async Task<ActionResult> Create([FromBody] JourneyModel journey)
         {
-            var result = await _orderService.Create(order);
-            if (result == Guid.Empty)
-            {
-                return BadRequest();
-            }
+            var result = await _journeyService.Create(journey);
+            if (result == Guid.Empty) return BadRequest();
 
             return Ok(result);
         }
+
         [HttpGet]
         public ActionResult GetAll()
         {
-            var ordersCollection = _orderService.GetAll();
+            var ordersCollection = _journeyService.GetAll();
             if (ordersCollection == null || !ordersCollection.Any())
                 return BadRequest("Collection is empty");
             return Ok(ordersCollection);
         }
+
         [HttpGet("{id}")]
         public async Task<ActionResult> GetOrder(Guid id)
         {
-            var order = await _orderService.Get(id);
+            var order = await _journeyService.Get(id);
             if (order == null)
-                return NotFound("Order was not found");
+                return NotFound("Journey was not found");
             return Ok(order);
         }
+
         [HttpPut]
-        public async Task<ActionResult> UpdateOrder([FromBody] OrderModel order)
+        public async Task<ActionResult> UpdateOrder([FromBody] JourneyModel journey)
         {
-            var result = await _orderService.Update(order);
+            var result = await _journeyService.Update(journey);
             if (result == Guid.Empty)
                 return BadRequest("Update failed");
             return Ok(result);
         }
+
         [HttpPost("Delete")]
         public async Task<ActionResult> DeleteOrder(Guid id)
         {
-            await _orderService.Delete(id);
+            await _journeyService.Delete(id);
             return Ok();
         }
     }

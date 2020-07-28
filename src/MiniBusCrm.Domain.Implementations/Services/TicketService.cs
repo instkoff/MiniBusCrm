@@ -28,25 +28,28 @@ namespace MiniBusCrm.Domain.Implementations.Services
             await _dbRepository.SaveChangesAsync();
             return ticketEntity.Id;
         }
+
         public List<TicketModel> GetAll()
         {
             var tickets = _dbRepository.Get<TicketEntity>()
-                .Include(o=>o.Order)
+                .Include(o => o.Journey)
                 .Include(p => p.Passenger)
-                .Include(r=>r.Route).ToList();
+                .Include(r => r.Route).ToList();
             var ticketModels = _mapper.Map<List<TicketModel>>(tickets);
             return ticketModels;
         }
+
         public async Task<TicketModel> Get(Guid id)
         {
             var ticketEntity = await _dbRepository.Get<TicketEntity>(x => x.Id == id)
-                .Include(o => o.Order)
+                .Include(o => o.Journey)
                 .Include(p => p.Passenger)
                 .Include(r => r.Route)
                 .FirstOrDefaultAsync();
             var ticketModel = _mapper.Map<TicketModel>(ticketEntity);
             return ticketModel;
         }
+
         public async Task<Guid> Update(TicketModel ticketModel)
         {
             var ticket = _mapper.Map<TicketEntity>(ticketModel);

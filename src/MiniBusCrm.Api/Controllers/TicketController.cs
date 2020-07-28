@@ -29,10 +29,7 @@ namespace MiniBusCrm.Api.Controllers
         {
             var model = _ticketService.Get(id);
 
-            if (model == null)
-            {
-                return BadRequest("Ticket not found");
-            }
+            if (model == null) return BadRequest("Ticket not found");
 
             return Ok(model);
         }
@@ -42,10 +39,7 @@ namespace MiniBusCrm.Api.Controllers
         {
             var collection = _ticketService.GetAll();
 
-            if (collection == null)
-            {
-                return BadRequest("Tickets not found");
-            }
+            if (collection == null) return BadRequest("Tickets not found");
 
             return Ok(collection);
         }
@@ -55,10 +49,7 @@ namespace MiniBusCrm.Api.Controllers
         {
             var result = await _ticketService.Update(model);
 
-            if (result == Guid.Empty)
-            {
-                return BadRequest("Ticket not updated");
-            }
+            if (result == Guid.Empty) return BadRequest("Ticket not updated");
 
             return Ok(result);
         }
