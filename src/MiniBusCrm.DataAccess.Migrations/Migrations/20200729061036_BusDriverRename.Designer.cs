@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using MiniBusCrm.DataAccess.Implementations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -9,9 +10,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MiniBusCrm.DataAccess.Migrations.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20200729061036_BusDriverRename")]
+    partial class BusDriverRename
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -74,7 +76,7 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.ToTable("Buses");
                 });
 
-            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PassengerEntity", b =>
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PassangerEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -100,7 +102,7 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Passengers");
+                    b.ToTable("Passangers");
                 });
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PlaneEntity", b =>
@@ -234,7 +236,7 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.TicketEntity", b =>
                 {
-                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.PassengerEntity", "Passenger")
+                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.PassangerEntity", "Passenger")
                         .WithMany("BusTickets")
                         .HasForeignKey("PassengerId");
 

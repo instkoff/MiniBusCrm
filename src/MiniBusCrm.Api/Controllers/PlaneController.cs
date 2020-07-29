@@ -7,19 +7,19 @@ using MiniBusCrm.Domain.Contracts.Services;
 
 namespace MiniBusCrm.Api.Controllers
 {
-    public class JourneyController : BaseController
+    public class PlaneController : BaseController
     {
-        private readonly IJourneyService _journeyService;
+        private readonly IPlaneService _planeService;
 
-        public JourneyController(IJourneyService journeyService)
+        public PlaneController(IPlaneService planeService)
         {
-            _journeyService = journeyService;
+            _planeService = planeService;
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult> Create([FromBody] JourneyModel journey)
+        public async Task<ActionResult> Create([FromBody] PlaneModel plane)
         {
-            var result = await _journeyService.Create(journey);
+            var result = await _planeService.Create(plane);
             if (result == Guid.Empty) return BadRequest();
 
             return Ok(result);
@@ -28,7 +28,7 @@ namespace MiniBusCrm.Api.Controllers
         [HttpGet]
         public ActionResult GetAll()
         {
-            var ordersCollection = _journeyService.GetAll();
+            var ordersCollection = _planeService.GetAll();
             if (ordersCollection == null || !ordersCollection.Any())
                 return BadRequest("Collection is empty");
             return Ok(ordersCollection);
@@ -37,16 +37,16 @@ namespace MiniBusCrm.Api.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult> GetOrder(Guid id)
         {
-            var order = await _journeyService.Get(id);
+            var order = await _planeService.Get(id);
             if (order == null)
-                return NotFound("Journey was not found");
+                return NotFound("Plane was not found");
             return Ok(order);
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateOrder([FromBody] JourneyModel journey)
+        public async Task<ActionResult> UpdateOrder([FromBody] PlaneModel plane)
         {
-            var result = await _journeyService.Update(journey);
+            var result = await _planeService.Update(plane);
             if (result == Guid.Empty)
                 return BadRequest("Update failed");
             return Ok(result);
@@ -55,7 +55,7 @@ namespace MiniBusCrm.Api.Controllers
         [HttpPost("Delete")]
         public async Task<ActionResult> DeleteOrder(Guid id)
         {
-            await _journeyService.Delete(id);
+            await _planeService.Delete(id);
             return Ok();
         }
     }

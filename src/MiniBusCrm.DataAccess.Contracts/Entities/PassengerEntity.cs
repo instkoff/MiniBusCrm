@@ -2,7 +2,7 @@
 
 namespace MiniBusCrm.DataAccess.Contracts.Entities
 {
-    public class PassangerEntity : BaseEntity
+    public class PassengerEntity : BaseEntity
     {
         public string Name { get; set; }
         public string Surname { get; set; }

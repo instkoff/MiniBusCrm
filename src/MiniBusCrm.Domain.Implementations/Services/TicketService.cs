@@ -24,6 +24,12 @@ namespace MiniBusCrm.Domain.Implementations.Services
         public async Task<Guid> Create(TicketModel ticketModel)
         {
             var ticketEntity = _mapper.Map<TicketEntity>(ticketModel);
+            var plane = await _dbRepository.Get<PlaneEntity>(p => p.Id == ticketModel.PlaneId)
+                .Include(t => t.BusTickets).FirstOrDefaultAsync();
+            ticketEntity.Route = await _dbRepository.Get<RouteEntity>(r => r.Id == ticketModel.RouteId)
+                .FirstOrDefaultAsync();
+            ticketEntity.Passenger.BusTickets.Add(ticketEntity);
+            plane.BusTickets.Add(ticketEntity);
             await _dbRepository.Add(ticketEntity);
             await _dbRepository.SaveChangesAsync();
             return ticketEntity.Id;
@@ -32,7 +38,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
         public List<TicketModel> GetAll()
         {
             var tickets = _dbRepository.Get<TicketEntity>()
-                .Include(o => o.Journey)
+                .Include(o => o.Plane)
                 .Include(p => p.Passenger)
                 .Include(r => r.Route).ToList();
             var ticketModels = _mapper.Map<List<TicketModel>>(tickets);
@@ -42,7 +48,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
         public async Task<TicketModel> Get(Guid id)
         {
             var ticketEntity = await _dbRepository.Get<TicketEntity>(x => x.Id == id)
-                .Include(o => o.Journey)
+                .Include(o => o.Plane)
                 .Include(p => p.Passenger)
                 .Include(r => r.Route)
                 .FirstOrDefaultAsync();

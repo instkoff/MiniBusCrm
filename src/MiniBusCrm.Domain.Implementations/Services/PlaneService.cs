@@ -11,49 +11,49 @@ using MiniBusCrm.Domain.Contracts.Services;
 
 namespace MiniBusCrm.Domain.Implementations.Services
 {
-    public class JourneyService : IJourneyService
+    public class PlaneService : IPlaneService
     {
         private readonly IDbRepository _dbRepository;
         private readonly IMapper _mapper;
 
-        public JourneyService(IDbRepository dbRepository, IMapper mapper)
+        public PlaneService(IDbRepository dbRepository, IMapper mapper)
         {
             _dbRepository = dbRepository;
             _mapper = mapper;
         }
 
-        public async Task<Guid> Create(JourneyModel journeyModel)
+        public async Task<Guid> Create(PlaneModel planeModel)
         {
-            var orderEntity = _mapper.Map<JourneyEntity>(journeyModel);
-            orderEntity.Route = _dbRepository.Get<RouteEntity>(r => r.Id == journeyModel.RouteId).FirstOrDefault();
+            var orderEntity = _mapper.Map<PlaneEntity>(planeModel);
+            orderEntity.Route = await _dbRepository.Get<RouteEntity>(r => r.Id == planeModel.RouteId).FirstOrDefaultAsync();
             await _dbRepository.Add(orderEntity);
             await _dbRepository.SaveChangesAsync();
             return orderEntity.Id;
         }
 
-        public List<JourneyModel> GetAll()
+        public List<PlaneModel> GetAll()
         {
-            var orderCollection = _dbRepository.GetAll<JourneyEntity>()
+            var planeCollection = _dbRepository.GetAll<PlaneEntity>()
                 .Include(r => r.Route)
-                .Include(t => t.BusTickets)
+                .Include(t=>t.BusTickets).ThenInclude(p=>p.Passenger)
                 .ToList();
-            var orderModels = _mapper.Map<List<JourneyModel>>(orderCollection);
-            return orderModels;
+            var planeModels = _mapper.Map<List<PlaneModel>>(planeCollection);
+            return planeModels;
         }
 
-        public async Task<JourneyModel> Get(Guid id)
+        public async Task<PlaneModel> Get(Guid id)
         {
-            var orderEntity = await _dbRepository.Get<JourneyEntity>(x => x.Id == id)
+            var planeEntity = await _dbRepository.Get<PlaneEntity>(x => x.Id == id)
                 .Include(r => r.Route)
                 .Include(t => t.BusTickets)
                 .FirstOrDefaultAsync();
-            var orderModel = _mapper.Map<JourneyModel>(orderEntity);
+            var orderModel = _mapper.Map<PlaneModel>(planeEntity);
             return orderModel;
         }
 
-        public async Task<Guid> Update(JourneyModel journeyModel)
+        public async Task<Guid> Update(PlaneModel planeModel)
         {
-            var orderEntity = _mapper.Map<JourneyEntity>(journeyModel);
+            var orderEntity = _mapper.Map<PlaneEntity>(planeModel);
             await _dbRepository.Update(orderEntity);
             await _dbRepository.SaveChangesAsync();
             return orderEntity.Id;
@@ -61,7 +61,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
 
         public async Task Delete(Guid id)
         {
-            await _dbRepository.Delete<JourneyEntity>(id);
+            await _dbRepository.Delete<PlaneEntity>(id);
             await _dbRepository.SaveChangesAsync();
         }
     }

@@ -5,7 +5,7 @@ namespace MiniBusCrm.DataAccess.Contracts.Entities
 {
     public class TicketEntity : BaseEntity
     {
-        public PassangerEntity Passenger { get; set; }
+        public PassengerEntity Passenger { get; set; }
         public string Seat { get; set; }
 
         [Column(TypeName = "money")] public decimal Price { get; set; }
@@ -14,6 +14,6 @@ namespace MiniBusCrm.DataAccess.Contracts.Entities
         public bool IsPaid { get; set; }
         public DateTime? PaidDate { get; set; }
         public RouteEntity Route { get; set; }
-        public JourneyEntity Journey { get; set; }
+        public PlaneEntity Plane { get; set; }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MiniBusCrm.DataAccess.Contracts.Entities
 {
-    public class DriverEntity : BaseEntity
+    public class BusDriverEntity : BaseEntity
     {
         public string Name { get; set; }
         public string Surname { get; set; }

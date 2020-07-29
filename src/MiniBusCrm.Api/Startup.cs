@@ -7,6 +7,7 @@ using Microsoft.Extensions.Hosting;
 using MiniBusCrm.Domain.Contracts.Services;
 using MiniBusCrm.Domain.Implementations.Profiles;
 using MiniBusCrm.Domain.Implementations.Services;
+using Newtonsoft.Json;
 
 namespace MiniBusCrm.Api
 {
@@ -22,13 +23,16 @@ namespace MiniBusCrm.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson();
+            services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
             services.AddDatabase(Configuration);
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddSwagger();
-            services.AddTransient<IJourneyService, JourneyService>()
+            services.AddTransient<IPlaneService, PlaneService>()
                 .AddTransient<IRouteService, RouteService>()
-                .AddTransient<ITicketService, TicketService>();
+                .AddTransient<ITicketService, TicketService>()
+                .AddTransient<IBusDriverService, BusDriverService>()
+                .AddTransient<IBusService, BusService>()
+                .AddTransient<IPassengerService, PassengerService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

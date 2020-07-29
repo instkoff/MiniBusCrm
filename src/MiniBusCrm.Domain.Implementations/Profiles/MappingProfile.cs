@@ -9,23 +9,23 @@ namespace MiniBusCrm.Domain.Implementations.Profiles
         public MappingProfile()
         {
             CreateMap<BusModel, BusEntity>();
-            CreateMap<DriverModel, DriverEntity>();
-            CreateMap<JourneyModel, JourneyEntity>();
-            CreateMap<PassangerModel, PassangerEntity>();
+            CreateMap<BusDriverModel, BusDriverEntity>();
+            CreateMap<PlaneModel, PlaneEntity>();
+            CreateMap<PassengerModel, PassengerEntity>();
             CreateMap<RouteModel, RouteEntity>();
             CreateMap<TicketModel, TicketEntity>();
 
             CreateMap<BusEntity, BusModel>();
-            CreateMap<DriverEntity, DriverModel>();
-            CreateMap<JourneyEntity, JourneyModel>()
+            CreateMap<BusDriverEntity, BusDriverModel>();
+            CreateMap<PlaneEntity, PlaneModel>()
                 .ForMember(dest => dest.RouteId, opt => opt.MapFrom(src => src.Route.Id));
-            CreateMap<PassangerEntity, PassangerModel>();
+            CreateMap<PassengerEntity, PassengerModel>();
             CreateMap<RouteEntity, RouteModel>()
-                .ForMember(dest=>dest.DriverId, opt=>opt.MapFrom(src=>src.Driver.Id))
+                .ForMember(dest=>dest.DriverId, opt=>opt.MapFrom(src=>src.BusDriver.Id))
                 .ForMember(dest=>dest.BusId, opt=>opt.MapFrom(src=>src.Bus.Id));
             CreateMap<TicketEntity, TicketModel>()
                 .ForMember(dest => dest.RouteId, opt => opt.MapFrom(src => src.Route.Id))
-                .ForMember(dest=>dest.JourneyId, opt=>opt.MapFrom(src=>src.Journey.Id));
+                .ForMember(dest=>dest.PlaneId, opt=>opt.MapFrom(src=>src.Plane.Id));
         }
     }
 }

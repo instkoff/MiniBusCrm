@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MiniBusCrm.DataAccess.Migrations.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20200728073630_Initial")]
-    partial class Initial
+    [Migration("20200729072052_Passenger_Rename")]
+    partial class Passenger_Rename
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -21,30 +21,7 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                 .HasAnnotation("ProductVersion", "3.1.5")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.BusEntity", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid");
-
-                    b.Property<DateTime>("CreateDate")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
-
-                    b.Property<string>("Model")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Number")
-                        .HasColumnType("text");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Buses");
-                });
-
-            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.DriverEntity", b =>
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.BusDriverEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -73,10 +50,10 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Drivers");
+                    b.ToTable("BusDrivers");
                 });
 
-            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.JourneyEntity", b =>
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.BusEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -85,26 +62,21 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.Property<DateTime>("CreateDate")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime>("DepartureDate")
-                        .HasColumnType("timestamp without time zone");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("OrderName")
+                    b.Property<string>("Model")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("RouteId")
-                        .HasColumnType("uuid");
+                    b.Property<string>("Number")
+                        .HasColumnType("text");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("RouteId");
-
-                    b.ToTable("Orders");
+                    b.ToTable("Buses");
                 });
 
-            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PassangerEntity", b =>
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PassengerEntity", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -130,7 +102,35 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Passangers");
+                    b.ToTable("Passengers");
+                });
+
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PlaneEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<DateTime>("DepartureDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("PlaneName")
+                        .HasColumnType("text");
+
+                    b.Property<Guid?>("RouteId")
+                        .HasColumnType("uuid");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RouteId");
+
+                    b.ToTable("Planes");
                 });
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", b =>
@@ -142,6 +142,9 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.Property<string>("ArrivalCity")
                         .HasColumnType("text");
 
+                    b.Property<Guid?>("BusDriverId")
+                        .HasColumnType("uuid");
+
                     b.Property<Guid?>("BusId")
                         .HasColumnType("uuid");
 
@@ -151,9 +154,6 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.Property<string>("DepartureCity")
                         .HasColumnType("text");
 
-                    b.Property<Guid?>("DriverId")
-                        .HasColumnType("uuid");
-
                     b.Property<bool>("IsActive")
                         .HasColumnType("boolean");
 
@@ -162,9 +162,9 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BusId");
+                    b.HasIndex("BusDriverId");
 
-                    b.HasIndex("DriverId");
+                    b.HasIndex("BusId");
 
                     b.ToTable("Routes");
                 });
@@ -187,13 +187,13 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.Property<bool>("IsPaid")
                         .HasColumnType("boolean");
 
-                    b.Property<Guid?>("OrderId")
-                        .HasColumnType("uuid");
-
                     b.Property<DateTime?>("PaidDate")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<Guid?>("PassengerId")
+                        .HasColumnType("uuid");
+
+                    b.Property<Guid?>("PlaneId")
                         .HasColumnType("uuid");
 
                     b.Property<decimal>("Price")
@@ -207,16 +207,16 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("OrderId");
-
                     b.HasIndex("PassengerId");
+
+                    b.HasIndex("PlaneId");
 
                     b.HasIndex("RouteId");
 
                     b.ToTable("Tickets");
                 });
 
-            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.JourneyEntity", b =>
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PlaneEntity", b =>
                 {
                     b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", "Route")
                         .WithMany()
@@ -225,24 +225,24 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", b =>
                 {
+                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.BusDriverEntity", "BusDriver")
+                        .WithMany()
+                        .HasForeignKey("BusDriverId");
+
                     b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.BusEntity", "Bus")
                         .WithMany()
                         .HasForeignKey("BusId");
-
-                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.DriverEntity", "Driver")
-                        .WithMany()
-                        .HasForeignKey("DriverId");
                 });
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.TicketEntity", b =>
                 {
-                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.JourneyEntity", "Journey")
-                        .WithMany("BusTickets")
-                        .HasForeignKey("OrderId");
-
-                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.PassangerEntity", "Passenger")
+                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.PassengerEntity", "Passenger")
                         .WithMany("BusTickets")
                         .HasForeignKey("PassengerId");
+
+                    b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.PlaneEntity", "Plane")
+                        .WithMany("BusTickets")
+                        .HasForeignKey("PlaneId");
 
                     b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", "Route")
                         .WithMany()

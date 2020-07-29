@@ -26,7 +26,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
         {
             var routeEntity = _mapper.Map<RouteEntity>(routeModel);
             routeEntity.Bus = await _dbRepository.Get<BusEntity>(b => b.Id == routeModel.BusId).FirstOrDefaultAsync();
-            routeEntity.Driver = await _dbRepository.Get<DriverEntity>(d => d.Id == routeModel.DriverId)
+            routeEntity.BusDriver = await _dbRepository.Get<BusDriverEntity>(d => d.Id == routeModel.DriverId)
                 .FirstOrDefaultAsync();
             await _dbRepository.Add(routeEntity);
             await _dbRepository.SaveChangesAsync();
@@ -37,7 +37,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
         {
             var routes = _dbRepository.Get<RouteEntity>()
                 .Include(b => b.Bus)
-                .Include(d => d.Driver).ToList();
+                .Include(d => d.BusDriver).ToList();
             var routeModels = _mapper.Map<List<RouteModel>>(routes);
             return routeModels;
         }
@@ -46,7 +46,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
         {
             var routeEntity = await _dbRepository.Get<RouteEntity>(x => x.Id == id)
                 .Include(b => b.Bus)
-                .Include(d => d.Driver)
+                .Include(d => d.BusDriver)
                 .FirstOrDefaultAsync();
             var routeModel = _mapper.Map<RouteModel>(routeEntity);
             return routeModel;
@@ -62,7 +62,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
 
         public async Task Delete(Guid id)
         {
-            await _dbRepository.Delete<JourneyEntity>(id);
+            await _dbRepository.Delete<PlaneEntity>(id);
             await _dbRepository.SaveChangesAsync();
         }
     }

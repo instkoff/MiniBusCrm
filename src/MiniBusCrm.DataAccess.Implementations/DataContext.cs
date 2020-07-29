@@ -21,10 +21,9 @@ namespace MiniBusCrm.DataAccess.Implementations
         ///     Контекст БД
         /// </summary>
         public DbSet<BusEntity> Buses { get; set; }
-
-        public DbSet<DriverEntity> Drivers { get; set; }
-        public DbSet<JourneyEntity> Orders { get; set; }
-        public DbSet<PassangerEntity> Passangers { get; set; }
+        public DbSet<BusDriverEntity> BusDrivers { get; set; }
+        public DbSet<PlaneEntity> Planes { get; set; }
+        public DbSet<PassengerEntity> Passengers { get; set; }
         public DbSet<RouteEntity> Routes { get; set; }
         public DbSet<TicketEntity> Tickets { get; set; }
 
