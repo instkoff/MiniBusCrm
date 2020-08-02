@@ -1,0 +1,34 @@
+<form [formGroup]="createDriverForm">
+
+  <p>
+    <mat-form-field appearance="outline">
+      <mat-label>Имя водителя</mat-label>
+      <input matInput
+             formControlName="name"
+             placeholder="Иннокентий">
+      <mat-hint>Так зовут людей</mat-hint>
+    </mat-form-field>
+  </p>
+
+  <label for="surName">
+    Фамилия водителя
+  </label>
+  <input type="text" id="surName" formControlName="surName">
+
+  <label for="patronymic">
+    Фамилия водителя
+  </label>
+  <input type="text" id="patronymic" formControlName="patronymic">
+
+  <label for="documentSerialNumber">
+    Фамилия водителя
+  </label>
+  <input type="text" id="documentSerialNumber" formControlName="documentSerialNumber">
+
+  <label for="documentNumber">
+    Фамилия водителя
+  </label>
+  <input type="text" id="documentNumber" formControlName="documentNumber">
+
+  <button [disabled]="!createDriverForm.valid" (click)="onSubmit()">Создать водилу</button>
+</form>
