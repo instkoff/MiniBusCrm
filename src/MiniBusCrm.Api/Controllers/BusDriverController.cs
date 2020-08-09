@@ -17,7 +17,7 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<BusDriverModel>> Create(BusDriverModel model)
+        public async Task<ActionResult<BusDriverModel>> Create([FromBody]BusDriverModel model)
         {
             var result = await _busDriverService.Create(model);
 
@@ -25,9 +25,9 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpGet("id")]
-        public ActionResult<BusDriverModel> Get(Guid id)
+        public async Task<IActionResult> Get(Guid id)
         {
-            var model = _busDriverService.Get(id);
+            var model = await _busDriverService.Get(id);
 
             if (model == null) return BadRequest("Bus driver not found");
 

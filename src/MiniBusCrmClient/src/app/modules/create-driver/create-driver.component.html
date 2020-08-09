@@ -1,34 +1,55 @@
-<form [formGroup]="createDriverForm">
+<div class="container">
+  <form [formGroup]="createDriverForm">
 
-  <p>
-    <mat-form-field appearance="outline">
-      <mat-label>Имя водителя</mat-label>
-      <input matInput
-             formControlName="name"
-             placeholder="Иннокентий">
-      <mat-hint>Так зовут людей</mat-hint>
-    </mat-form-field>
-  </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Фамилия водителя</mat-label>
+        <input matInput
+               formControlName="surname"
+               placeholder="Иванов">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Имя водителя</mat-label>
+        <input matInput
+               formControlName="name"
+               placeholder="Иван">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Отчество водителя</mat-label>
+        <input matInput
+               formControlName="patronymic"
+               placeholder="Иванович">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Серийный номер ДУЛ</mat-label>
+        <input matInput
+               formControlName="documentSerialNumber"
+               placeholder="1234">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Номер ДУЛ</mat-label>
+        <input matInput
+               formControlName="documentNumber"
+               placeholder="56789">
+      </mat-form-field>
+    </p>
+    <p>
+      <mat-form-field appearance="outline">
+        <mat-label>Номер телефона:</mat-label>
+        <input matInput
+               formControlName="phoneNumber"
+               placeholder="+7(123)4567890">
+      </mat-form-field>
+    </p>
 
-  <label for="surName">
-    Фамилия водителя
-  </label>
-  <input type="text" id="surName" formControlName="surName">
-
-  <label for="patronymic">
-    Фамилия водителя
-  </label>
-  <input type="text" id="patronymic" formControlName="patronymic">
-
-  <label for="documentSerialNumber">
-    Фамилия водителя
-  </label>
-  <input type="text" id="documentSerialNumber" formControlName="documentSerialNumber">
-
-  <label for="documentNumber">
-    Фамилия водителя
-  </label>
-  <input type="text" id="documentNumber" formControlName="documentNumber">
-
-  <button [disabled]="!createDriverForm.valid" (click)="onSubmit()">Создать водилу</button>
-</form>
+    <button mat-button [disabled]="!createDriverForm.valid" (click)="onSubmit()">Создать водилу</button>
+  </form>
+</div>

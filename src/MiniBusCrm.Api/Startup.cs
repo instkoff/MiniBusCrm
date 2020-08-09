@@ -27,6 +27,7 @@ namespace MiniBusCrm.Api
             services.AddDatabase(Configuration);
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddSwagger();
+            services.AddCors();
             services.AddTransient<IPlaneService, PlaneService>()
                 .AddTransient<IRouteService, RouteService>()
                 .AddTransient<ITicketService, TicketService>()
@@ -43,7 +44,12 @@ namespace MiniBusCrm.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
-
+            app.UseCors(builder =>
+            {
+                builder.AllowAnyOrigin();
+                builder.AllowAnyHeader();
+                builder.AllowAnyMethod();
+            });
             app.UseAuthorization();
 
             app.UseSwagger();

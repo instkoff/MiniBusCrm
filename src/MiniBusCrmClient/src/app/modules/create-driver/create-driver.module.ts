@@ -4,8 +4,9 @@ import { CreateDriverComponent } from './create-driver.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MatFormFieldModule } from "@angular/material/form-field";
-import { MatInput, MatInputModule } from "@angular/material/input";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInput, MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
 
 const routes: Routes = [
   {
@@ -23,7 +24,8 @@ const routes: Routes = [
     ReactiveFormsModule,
     HttpClientModule,
     MatFormFieldModule,
-    MatInputModule
+    MatInputModule,
+    MatButtonModule
   ]
 })
 export class CreateDriverModule { }

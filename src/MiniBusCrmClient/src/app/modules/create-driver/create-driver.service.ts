@@ -4,23 +4,24 @@ import { Observable } from 'rxjs';
 
 export interface Driver {
   name: string;
-  surName: string;
+  surname: string;
   patronymic: string;
   documentSerialNumber: string;
   documentNumber: string;
+  phoneNumber: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class CreateDriverService {
-  private baseUri: string;
+  private readonly baseUri: string;
 
   constructor(private http: HttpClient) {
-    this.baseUri = 'http://localhost/api';
+    this.baseUri = 'https://localhost:5001/api';
   }
 
   public createNewDriver(newDriver: Driver): Observable<any> {
-    return this.http.post(`${this.baseUri}/driver`, newDriver);
+    return this.http.post(`${this.baseUri}/BusDriver`, newDriver);
   }
 }
