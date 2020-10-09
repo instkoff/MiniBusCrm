@@ -17,7 +17,7 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpPost("Create")]
-        public async Task<ActionResult> Create([FromBody] PlaneModel plane)
+        public async Task<IActionResult> Create([FromBody] PlaneModel plane)
         {
             var result = await _planeService.Create(plane);
             if (result == Guid.Empty) return BadRequest();
@@ -26,7 +26,7 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetAll()
+        public IActionResult GetAll()
         {
             var ordersCollection = _planeService.GetAll();
             if (ordersCollection == null || !ordersCollection.Any())
@@ -35,7 +35,7 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult> GetOrder(Guid id)
+        public async Task<IActionResult> GetOrder(Guid id)
         {
             var order = await _planeService.Get(id);
             if (order == null)
@@ -44,7 +44,7 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> UpdateOrder([FromBody] PlaneModel plane)
+        public async Task<IActionResult> UpdateOrder([FromBody] PlaneModel plane)
         {
             var result = await _planeService.Update(plane);
             if (result == Guid.Empty)
@@ -53,7 +53,7 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpPost("Delete")]
-        public async Task<ActionResult> DeleteOrder(Guid id)
+        public async Task<IActionResult> DeleteOrder(Guid id)
         {
             await _planeService.Delete(id);
             return Ok();

@@ -45,7 +45,7 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpPut]
-        public async Task<ActionResult> Update(BusModel model)
+        public async Task<IActionResult> Update(BusModel model)
         {
             var result = await _busService.Update(model);
 
@@ -55,7 +55,7 @@ namespace MiniBusCrm.Api.Controllers
         }
 
         [HttpDelete("id")]
-        public async Task<ActionResult> Delete(Guid id)
+        public async Task<IActionResult> Delete(Guid id)
         {
             await _busService.Delete(id);
             return Ok();
