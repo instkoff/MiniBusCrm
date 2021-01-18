@@ -1,43 +1,78 @@
+import { date } from 'quasar'
+
 export const AXIOS_URLS = {
-  devBaseUrl: 'http://localhost:8000/api',
+  devBaseUrl: 'http://localhost:5000/api',
   prodBaseUrl: 'http://10.3.189.50:8000/api'
 }
-export const mainMenuLinks = [
-  {
-    title: 'Главная',
-    icon: 'home',
-    link: ''
+
+export const linksInfo = {
+  dashboard: {
+    title: 'Dashboard',
+    icon: 'dashboard',
+    linkTo: '/dashboard',
+    access: ['admin', 'oper']
   },
-  {
-    title: 'Оформить билет',
+  orderWizard: {
+    title: 'Оформление билета',
     icon: 'receipt',
-    link: 'order-wizard'
+    linkTo: '/order-wizard',
+    access: ['admin', 'oper']
   },
-  {
-    title: 'Рейсы',
-    icon: 'rv_hookup',
-    link: 'planes'
+  planes: {
+    title: 'Список рейсов',
+    icon: 'dvr',
+    linkTo: '/planes',
+    access: ['admin', 'oper'],
+    children: {
+      planeDetails: {
+        title: 'Детали рейса',
+        linkTo: '/planes/plane-details',
+        icon: 'alt_route'
+      }
+    }
+  },
+  nsiRoutes: {
+    title: 'НСИ',
+    icon: 'note',
+    linkTo: null,
+    access: ['admin'],
+    expansionItem: true,
+    children: {
+      buses: {
+        title: 'Автобусы',
+        linkTo: '/nsi/buses',
+        icon: 'directions_bus'
+      },
+      busDrivers: {
+        title: 'Водители',
+        linkTo: '/nsi/bus-drivers',
+        icon: 'person'
+      },
+      passengers: {
+        title: 'Пассажиры',
+        linkTo: '/nsi/passengers',
+        icon: 'group'
+      },
+      routes: {
+        title: 'Маршруты',
+        linkTo: '/nsi/routes',
+        icon: 'add_road'
+      }
+    }
+  },
+  settings: {
+    title: 'Настройки',
+    icon: 'settings',
+    linkTo: null,
+    access: ['admin'],
+    expansionItem: true,
+    children: {
+      users: {
+        title: 'Users',
+        linkTo: '/settings/users',
+        icon: 'person'
+      }
+    }
   }
-]
-export const nsiLinks = [
-  {
-    title: 'Маршруты',
-    icon: 'alt_route',
-    link: 'routes'
-  },
-  {
-    title: 'Водители',
-    icon: 'airline_seat_recline_normal',
-    link: 'drivers'
-  },
-  {
-    title: 'Автобусы',
-    icon: 'airport_shuttle',
-    link: 'buses'
-  },
-  {
-    title: 'Пассажиры',
-    icon: 'people',
-    link: 'passengers'
-  }
-]
+}
+

@@ -1,11 +1,11 @@
 <template>
   <q-page padding>
-    <!-- content -->
+    <router-view/>
   </q-page>
 </template>
 
 <script>
 export default {
-  // name: 'PageName',
+  name: 'Planes'
 }
 </script>

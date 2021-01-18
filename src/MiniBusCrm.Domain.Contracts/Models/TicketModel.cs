@@ -2,10 +2,8 @@
 
 namespace MiniBusCrm.Domain.Contracts.Models
 {
-    public class TicketModel
+    public class TicketModel : BaseModel
     {
-        public Guid Id { get; set; }
-        public DateTime CreateDate { get; set; }
         public PassengerModel Passenger { get; set; }
         public string Seat { get; set; }
         public decimal Price { get; set; }

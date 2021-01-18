@@ -2,6 +2,8 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 
 import app from './app'
+import alert from './alert'
+import authentication from './authentication'
 
 Vue.use(Vuex)
 
@@ -13,11 +15,13 @@ Vue.use(Vuex)
  * async/await or return a Promise which resolves
  * with the Store instance.
  */
-
+let store = null
 export default function (/* { ssrContext } */) {
-  const Store = new Vuex.Store({
+  store = new Vuex.Store({
     modules: {
-      app
+      app,
+      alert,
+      authentication
     },
 
     // enable strict mode (adds overhead!)
@@ -25,5 +29,6 @@ export default function (/* { ssrContext } */) {
     strict: process.env.DEV
   })
 
-  return Store
+  return store
 }
+export { store }

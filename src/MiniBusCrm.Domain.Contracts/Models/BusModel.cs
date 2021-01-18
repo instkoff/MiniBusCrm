@@ -2,9 +2,8 @@
 
 namespace MiniBusCrm.Domain.Contracts.Models
 {
-    public class BusModel
+    public class BusModel : BaseModel
     {
-        public Guid Id { get; set; }
         public string Model { get; set; }
         public string Number { get; set; }
     }

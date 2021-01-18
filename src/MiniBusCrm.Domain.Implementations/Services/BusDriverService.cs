@@ -32,7 +32,7 @@ namespace MiniBusCrm.Domain.Implementations.Services
 
         public List<BusDriverModel> GetAll()
         {
-            var driversCollection = _dbRepository.GetAll<BusDriverEntity>().ToList();
+            var driversCollection = _dbRepository.Get<BusDriverEntity>().ToList();
             var driverModels = _mapper.Map<List<BusDriverModel>>(driversCollection);
             return driverModels;
         }

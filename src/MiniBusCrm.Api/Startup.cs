@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MiniBusCrm.Domain.Contracts.Models.Settings;
 using MiniBusCrm.Domain.Contracts.Services;
 using MiniBusCrm.Domain.Implementations.Profiles;
 using MiniBusCrm.Domain.Implementations.Services;
-using Newtonsoft.Json;
 
 namespace MiniBusCrm.Api
 {
@@ -23,11 +23,12 @@ namespace MiniBusCrm.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
+            services.AddControllers();
+            services.Configure<AppSettings>(Configuration.GetSection(nameof(AppSettings)));
+            services.AddJwtAuth(Configuration);
             services.AddDatabase(Configuration);
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddSwagger();
-            services.AddCors();
             services.AddTransient<IPlaneService, PlaneService>()
                 .AddTransient<IRouteService, RouteService>()
                 .AddTransient<ITicketService, TicketService>()
@@ -40,16 +41,16 @@ namespace MiniBusCrm.Api
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment()) app.UseDeveloperExceptionPage();
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
             app.UseCors(builder =>
             {
                 builder.AllowAnyOrigin();
                 builder.AllowAnyHeader();
                 builder.AllowAnyMethod();
             });
+            app.UseHttpsRedirection();
+
+            app.UseRouting();
+            app.UseAuthentication();
             app.UseAuthorization();
 
             app.UseSwagger();

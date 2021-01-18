@@ -15,9 +15,9 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn)
-                .HasAnnotation("ProductVersion", "3.1.5")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+                .UseIdentityByDefaultColumns()
+                .HasAnnotation("Relational:MaxIdentifierLength", 63)
+                .HasAnnotation("ProductVersion", "5.0.2");
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.BusDriverEntity", b =>
                 {
@@ -217,11 +217,74 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.ToTable("Tickets");
                 });
 
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.UserEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("timestamp without time zone");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("text");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Password")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Users");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("78993485-e953-4dbb-b939-fe9e684e6530"),
+                            CreateDate = new DateTime(2021, 1, 18, 12, 19, 39, 995, DateTimeKind.Local).AddTicks(6738),
+                            FirstName = "Admin",
+                            IsActive = true,
+                            LastName = "Admin",
+                            Password = "10.ioFD9w0SjwRA4DkHX0tHqg==.yLUtO8z+E0XrpTcC51+G8mfZm3dTR37dbtNYPGCt3e8=",
+                            Role = "Admin",
+                            Username = "admin"
+                        },
+                        new
+                        {
+                            Id = new Guid("f5802476-b465-443b-af72-c954a97c6f6c"),
+                            CreateDate = new DateTime(2021, 1, 18, 12, 19, 39, 995, DateTimeKind.Local).AddTicks(9539),
+                            FirstName = "Operator",
+                            IsActive = true,
+                            LastName = "Operator",
+                            Password = "10.CklkfSFyQ8TnMgaToPThNQ==.Qbg+8BgQz1odxkIgq0IDsxyTgkr/2OsYJhDtMIU6WyQ=",
+                            Role = "Operator",
+                            Username = "oper"
+                        });
+                });
+
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PlaneEntity", b =>
                 {
                     b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", "Route")
                         .WithMany()
                         .HasForeignKey("RouteId");
+
+                    b.Navigation("Route");
                 });
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", b =>
@@ -233,6 +296,10 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.BusEntity", "Bus")
                         .WithMany()
                         .HasForeignKey("BusId");
+
+                    b.Navigation("Bus");
+
+                    b.Navigation("BusDriver");
                 });
 
             modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.TicketEntity", b =>
@@ -248,6 +315,22 @@ namespace MiniBusCrm.DataAccess.Migrations.Migrations
                     b.HasOne("MiniBusCrm.DataAccess.Contracts.Entities.RouteEntity", "Route")
                         .WithMany()
                         .HasForeignKey("RouteId");
+
+                    b.Navigation("Passenger");
+
+                    b.Navigation("Plane");
+
+                    b.Navigation("Route");
+                });
+
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PassengerEntity", b =>
+                {
+                    b.Navigation("BusTickets");
+                });
+
+            modelBuilder.Entity("MiniBusCrm.DataAccess.Contracts.Entities.PlaneEntity", b =>
+                {
+                    b.Navigation("BusTickets");
                 });
 #pragma warning restore 612, 618
         }
